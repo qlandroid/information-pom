@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.information.dao.DeviceExtMapper">
+    <resultMap id="BaseResultMap" type="com.information.pojo.Device">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type_id" jdbcType="CHAR" property="typeId"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="buy_electric" jdbcType="INTEGER" property="buyElectric"/>
+        <result column="electric" jdbcType="INTEGER" property="electric"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operatorId"/>
+        <result column="detailed_id" jdbcType="INTEGER" property="detailedId"/>
+        <result column="device_admin" jdbcType="VARCHAR" property="deviceAdmin"/>
+        <result column="device_address" jdbcType="VARCHAR" property="deviceAddress"/>
+        <result column="users_id" jdbcType="INTEGER" property="usersId"/>
+        <result column="time" jdbcType="INTEGER" property="time"/>
+        <result column="money" jdbcType="INTEGER" property="money"/>
+        <result column="balance" jdbcType="INTEGER" property="balance"/>
+        <result column="d_status" jdbcType="SMALLINT" property="dStatus"/>
+        <result column="voltage" jdbcType="INTEGER" property="voltage"/>
+        <result column="electric_current" jdbcType="INTEGER" property="electricCurrent"/>
+        <result column="power" jdbcType="INTEGER" property="power"/>
+        <result column="reactive_power" jdbcType="INTEGER" property="reactivePower"/>
+        <result column="apparent_power" jdbcType="INTEGER" property="apparentPower"/>
+        <result column="power_factor" jdbcType="INTEGER" property="powerFactor"/>
+        <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+        <result column="leakage_current" jdbcType="INTEGER" property="leakageCurrent"/>
+        <result column="temperature" jdbcType="INTEGER" property="temperature"/>
+        <result column="humidity" jdbcType="INTEGER" property="humidity"/>
+        <result column="detectionsign" jdbcType="INTEGER" property="detectionsign"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="updatetime" jdbcType="INTEGER" property="updatetime"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="elec_status" jdbcType="SMALLINT" property="elecStatus"/>
+        <result column="replace_status" jdbcType="INTEGER" property="replaceStatus"/>
+        <result column="replace_reason" jdbcType="VARCHAR" property="replaceReason"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+    </resultMap>
+
+
+    <select id="selectDevListByUserId" parameterType="map" resultMap="BaseResultMap">
+        select d.* from user_device ud left join device d on d.id = ud.device_id
+        where ud.users_id = #{userId,jdbcType=INTEGER }
+        <if test="devId != null and devId != 0">
+            AND ud.device_id = #{devId,jdbcType=INTEGER}
+        </if>
+        <if test="devCode != null">
+            <![CDATA[
+                and d.code like  #{devCode,jdbcType=INTEGER}
+            ]]>
+        </if>
+
+    </select>
+</mapper>

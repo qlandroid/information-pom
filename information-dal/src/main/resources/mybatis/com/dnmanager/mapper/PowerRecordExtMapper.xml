@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.information.dao.PowerRecordExtMapper">
+    <resultMap id="BaseResultMap" type="com.information.pojo.PowerRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="ptime" jdbcType="INTEGER" property="ptime"/>
+        <result column="electric" jdbcType="INTEGER" property="electric"/>
+    </resultMap>
+
+    <select id="getPowerRecordSum" parameterType="com.information.bean.PowerRecordExt" resultMap="BaseResultMap">
+
+
+        select SUM(pr.electric) total from power_record pr
+        LEFT JOIN device d ON d.code = pr.code
+        where d.id = #{id,jdbcType=INTEGER}
+        <if test="startD != null ">
+            AND ptime &gt;= #{startD}
+        </if>
+        <if test="endD != null ">
+            AND ptime &lt;= #{endD}
+        </if>
+    </select>
+
+</mapper>

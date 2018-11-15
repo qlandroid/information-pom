@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.information.dao.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.information.pojo.Commodity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="elec_type" jdbcType="VARCHAR" property="elecType" />
+    <result column="voltage" jdbcType="INTEGER" property="voltage" />
+    <result column="current_spec" jdbcType="VARCHAR" property="currentSpec" />
+    <result column="pulse_cons" jdbcType="VARCHAR" property="pulseCons" />
+    <result column="acc_class" jdbcType="VARCHAR" property="accClass" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="guide_price" jdbcType="INTEGER" property="guidePrice" />
+    <result column="banner_img" jdbcType="VARCHAR" property="bannerImg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, table_name, commodity_name, elec_type, voltage, current_spec, pulse_cons, acc_class, 
+    frequency, guide_price, banner_img
+  </sql>
+  <select id="selectByExample" parameterType="com.information.pojo.CommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.information.pojo.CommodityExample">
+    delete from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.information.pojo.Commodity">
+    insert into commodity (id, table_name, commodity_name, 
+      elec_type, voltage, current_spec, 
+      pulse_cons, acc_class, frequency, 
+      guide_price, banner_img)
+    values (#{id,jdbcType=INTEGER}, #{tableName,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{elecType,jdbcType=VARCHAR}, #{voltage,jdbcType=INTEGER}, #{currentSpec,jdbcType=VARCHAR}, 
+      #{pulseCons,jdbcType=VARCHAR}, #{accClass,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}, 
+      #{guidePrice,jdbcType=INTEGER}, #{bannerImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.information.pojo.Commodity">
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="elecType != null">
+        elec_type,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="currentSpec != null">
+        current_spec,
+      </if>
+      <if test="pulseCons != null">
+        pulse_cons,
+      </if>
+      <if test="accClass != null">
+        acc_class,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="guidePrice != null">
+        guide_price,
+      </if>
+      <if test="bannerImg != null">
+        banner_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="elecType != null">
+        #{elecType,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="currentSpec != null">
+        #{currentSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="pulseCons != null">
+        #{pulseCons,jdbcType=VARCHAR},
+      </if>
+      <if test="accClass != null">
+        #{accClass,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="guidePrice != null">
+        #{guidePrice,jdbcType=INTEGER},
+      </if>
+      <if test="bannerImg != null">
+        #{bannerImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.information.pojo.CommodityExample" resultType="java.lang.Long">
+    select count(*) from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update commodity
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tableName != null">
+        table_name = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityName != null">
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elecType != null">
+        elec_type = #{record.elecType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voltage != null">
+        voltage = #{record.voltage,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentSpec != null">
+        current_spec = #{record.currentSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pulseCons != null">
+        pulse_cons = #{record.pulseCons,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accClass != null">
+        acc_class = #{record.accClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.guidePrice != null">
+        guide_price = #{record.guidePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.bannerImg != null">
+        banner_img = #{record.bannerImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update commodity
+    set id = #{record.id,jdbcType=INTEGER},
+      table_name = #{record.tableName,jdbcType=VARCHAR},
+      commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      elec_type = #{record.elecType,jdbcType=VARCHAR},
+      voltage = #{record.voltage,jdbcType=INTEGER},
+      current_spec = #{record.currentSpec,jdbcType=VARCHAR},
+      pulse_cons = #{record.pulseCons,jdbcType=VARCHAR},
+      acc_class = #{record.accClass,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      guide_price = #{record.guidePrice,jdbcType=INTEGER},
+      banner_img = #{record.bannerImg,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.information.pojo.Commodity">
+    update commodity
+    <set>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="elecType != null">
+        elec_type = #{elecType,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=INTEGER},
+      </if>
+      <if test="currentSpec != null">
+        current_spec = #{currentSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="pulseCons != null">
+        pulse_cons = #{pulseCons,jdbcType=VARCHAR},
+      </if>
+      <if test="accClass != null">
+        acc_class = #{accClass,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="guidePrice != null">
+        guide_price = #{guidePrice,jdbcType=INTEGER},
+      </if>
+      <if test="bannerImg != null">
+        banner_img = #{bannerImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.information.pojo.Commodity">
+    update commodity
+    set table_name = #{tableName,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      elec_type = #{elecType,jdbcType=VARCHAR},
+      voltage = #{voltage,jdbcType=INTEGER},
+      current_spec = #{currentSpec,jdbcType=VARCHAR},
+      pulse_cons = #{pulseCons,jdbcType=VARCHAR},
+      acc_class = #{accClass,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      guide_price = #{guidePrice,jdbcType=INTEGER},
+      banner_img = #{bannerImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.information.pojo.CommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合作信息提交</title>
+    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/2.0.0/css/frozen.css">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="ui-form ui-border-t">
+        <div class="ui-form-item ui-border-b">
+            <label>
+                公司名称
+            </label>
+            <input type="text" v-model="vName" :value="vName" placeholder="请输入公司名称">
+            <a href="#" class="ui-icon-close" @click="{{vName = ''}}">
+            </a>
+        </div>
+        <div class="ui-form-item ui-border-b">
+            <label>
+                联系人
+            </label>
+            <input type="text" v-model="vUserName" placeholder="请输入联系人">
+            <a href="#" @click="{{vUserName = ''}}" class="ui-icon-close">
+            </a>
+        </div>
+        <div class="ui-form-item ui-border-b">
+            <label>
+                联系电话
+            </label>
+            <input type="text" v-model="vUserPhone" placeholder="请输入联系电话">
+            <a href="#" @click="{{vUserPhone = ''}}" class="ui-icon-close">
+            </a>
+        </div>
+        <div class="ui-form-item ui-border-b">
+            <label>
+                联系地址
+            </label>
+            <input type="text" v-model="vAddress" placeholder="请输入联系地址">
+            <a href="#" @click="{{vAddress = ''}}" class="ui-icon-close">
+            </a>
+        </div>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn-lg ui-btn-primary" @click="submit">
+                提交
+            </button>
+        </div>
+    </div>
+    <div class="ui-dialog ui-dialog-operate " :class="{'show':isShowLoading}">
+        <div style="width: 40px;height: 40px ;background-color: white">
+            <img @click="{isShowLoading = false}" src="icon/loading.gif" style="width: 40px;height: 40px">
+        </div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            vName: "",
+            vUserName: "",
+            vUserPhone: "",
+            vAddress: "",
+            isShowLoading: false
+        },
+        methods: {
+            clear: function (s) {
+                s = "";
+            },
+            submit: function () {
+                this.isShowLoading = true;
+            }
+        }
+    });
+
+</script>
+<style>
+    input {
+        width: 70%;
+    }
+</style>
+</body>
+</html>

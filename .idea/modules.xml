@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/information-dal/information-dal.iml" filepath="$PROJECT_DIR$/information-dal/information-dal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/information-domain/information-domain.iml" filepath="$PROJECT_DIR$/information-domain/information-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/information-pom.iml" filepath="$PROJECT_DIR$/information-pom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/information-web/information-web.iml" filepath="$PROJECT_DIR$/information-web/information-web.iml" />
+    </modules>
+  </component>
+</project>
