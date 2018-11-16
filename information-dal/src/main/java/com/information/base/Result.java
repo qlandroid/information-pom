@@ -1,5 +1,8 @@
 package com.information.base;
 
+
+import com.github.pagehelper.Page;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +87,11 @@ public class Result {
         }
         r.setList(l);
         return r;
+    }
+
+    public static Result okPageList(Page l) {
+
+        return okList(l.getResult(), l.getTotal(), l.getPages());
     }
 
     public static Result okList(List l, Long total, int pages) {

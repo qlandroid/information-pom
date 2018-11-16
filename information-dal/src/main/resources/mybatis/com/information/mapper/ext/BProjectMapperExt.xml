@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.information.dao.BProjectMapper">
+
+    <sql id="Base_Column_page_no_vip">
+        bp.id, bp.title, bp.province, bp.city, bp.district, bp.b_project_type_id, bp.create_date, bp.change_date
+    </sql>
+    <select id="selectPageNotVip" resultMap="BaseResultMap" parameterType="com.information.pojo.BProject">
+        SELECT <include refid="Base_Column_page_no_vip"></include> FROM b_project bp
+        <where>
+            bp.send_status = 1 AND bp.audit_status = 2
+            <if test="province != null and province != ''">
+                AND bp.province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                AND bp.city = #{city}
+            </if>
+            <if test="district != null and district != ''">
+                AND bp.district = #{district}
+            </if>
+        </where>
+    </select>
+    <select id="selectPageVip" resultMap="BaseResultMap" parameterType="com.information.pojo.BProject">
+        SELECT <include refid="Base_Column_List"></include> FROM b_project
+        <where>
+            bp.send_status = 1 AND bp.audit_status = 2
+            <if test="province != null and province != ''">
+                AND bp.province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                AND bp.city = #{city}
+            </if>
+            <if test="district != null and district != ''">
+                AND bp.district = #{district}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.information.dao.BProjectAuditRecordMapper">
+  <resultMap id="BaseResultMap" type="com.information.pojo.BProjectAuditRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="b_project_id" jdbcType="INTEGER" property="bProjectId" />
+    <result column="admin_user_id" jdbcType="INTEGER" property="adminUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="audit_details" jdbcType="VARCHAR" property="auditDetails" />
+    <result column="audit_status" jdbcType="CHAR" property="auditStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, b_project_id, admin_user_id, create_date, audit_details, audit_status
+  </sql>
+  <select id="selectByExample" parameterType="com.information.pojo.BProjectAuditRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_project_audit_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_project_audit_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_project_audit_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.information.pojo.BProjectAuditRecordExample">
+    delete from b_project_audit_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.information.pojo.BProjectAuditRecord">
+    insert into b_project_audit_record (id, b_project_id, admin_user_id, 
+      create_date, audit_details, audit_status
+      )
+    values (#{id,jdbcType=INTEGER}, #{bProjectId,jdbcType=INTEGER}, #{adminUserId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{auditDetails,jdbcType=VARCHAR}, #{auditStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.information.pojo.BProjectAuditRecord">
+    insert into b_project_audit_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bProjectId != null">
+        b_project_id,
+      </if>
+      <if test="adminUserId != null">
+        admin_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="auditDetails != null">
+        audit_details,
+      </if>
+      <if test="auditStatus != null">
+        audit_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bProjectId != null">
+        #{bProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="adminUserId != null">
+        #{adminUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditDetails != null">
+        #{auditDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.information.pojo.BProjectAuditRecordExample" resultType="java.lang.Long">
+    select count(*) from b_project_audit_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_project_audit_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bProjectId != null">
+        b_project_id = #{record.bProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminUserId != null">
+        admin_user_id = #{record.adminUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditDetails != null">
+        audit_details = #{record.auditDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatus != null">
+        audit_status = #{record.auditStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_project_audit_record
+    set id = #{record.id,jdbcType=INTEGER},
+      b_project_id = #{record.bProjectId,jdbcType=INTEGER},
+      admin_user_id = #{record.adminUserId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      audit_details = #{record.auditDetails,jdbcType=VARCHAR},
+      audit_status = #{record.auditStatus,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.information.pojo.BProjectAuditRecord">
+    update b_project_audit_record
+    <set>
+      <if test="bProjectId != null">
+        b_project_id = #{bProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="adminUserId != null">
+        admin_user_id = #{adminUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditDetails != null">
+        audit_details = #{auditDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        audit_status = #{auditStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.information.pojo.BProjectAuditRecord">
+    update b_project_audit_record
+    set b_project_id = #{bProjectId,jdbcType=INTEGER},
+      admin_user_id = #{adminUserId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      audit_details = #{auditDetails,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.information.pojo.BProjectAuditRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_project_audit_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

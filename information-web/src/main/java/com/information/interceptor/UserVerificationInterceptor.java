@@ -1,6 +1,7 @@
 package com.information.interceptor;
 
 import com.information.HaltException;
+import com.information.TokenHelper;
 import com.information.base.Result;
 import com.google.gson.Gson;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,6 +20,10 @@ public class UserVerificationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        response.setHeader("Access-Control-Allow-Headers", TokenHelper.PRO_ACCESS_TOKEN +","+TokenHelper.PRO_AUTHOR +"," +"Content-Type");
+        response.setHeader("Access-Control-Allow-Origin","*");
+
+
         return true;
 
     }

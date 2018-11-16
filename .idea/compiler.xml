@@ -15,14 +15,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="dnmanager-pom" target="1.8" />
       <module name="information-dal" target="1.8" />
       <module name="information-domain" target="1.8" />
       <module name="information-pom" target="1.8" />
       <module name="information-web" target="1.8" />
-      <module name="manager-dal" target="1.8" />
-      <module name="manager-domain" target="1.8" />
-      <module name="manager-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
