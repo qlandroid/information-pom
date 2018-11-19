@@ -6,6 +6,7 @@ import com.information.HaltException;
 import com.information.TokenHelper;
 import com.information.base.Result;
 import com.information.pojo.BProject;
+import com.information.pojo.BProjectType;
 import com.information.service.IBProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/bproject", method = RequestMethod.POST)
@@ -64,7 +66,7 @@ public class BProjectController {
     @ResponseBody
     public Object selectBProject(HttpServletRequest request, @RequestBody BProject select) {
         Integer userId = TokenHelper.checkToken(request);
-        Page page = bProjectService.selectBProject(select,userId);
+        Page page = bProjectService.selectBProject(select, userId);
         return Result.okPageList(page);
     }
 
@@ -72,8 +74,16 @@ public class BProjectController {
     @ResponseBody
     public Object selectByKey(HttpServletRequest request, @RequestBody BProject select) {
         Integer userId = TokenHelper.checkToken(request);
-        BProject data = bProjectService.selectByKey(select,userId);
+        BProject data = bProjectService.selectByKey(select, userId);
         return Result.ok(data);
+    }
+
+    @RequestMapping("/types")
+    @ResponseBody
+    public Object types(HttpServletRequest request) {
+        Integer userId = TokenHelper.checkToken(request);
+        List<BProjectType> list = bProjectService.selectTypes();
+        return list;
     }
 
 }

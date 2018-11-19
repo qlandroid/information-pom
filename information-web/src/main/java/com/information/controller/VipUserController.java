@@ -4,10 +4,10 @@ package com.information.controller;
 import com.information.HaltException;
 import com.information.ReloginException;
 import com.information.TokenHelper;
-import com.information.base.Result;
 import com.information.dao.VipUserMapper;
 import com.information.pojo.VipUser;
 import com.information.pojo.VipUserExample;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Controller
 public class VipUserController {
-
+    Logger logger = Logger.getLogger(VipUserController.class);
 
     @Autowired
     VipUserMapper vipUserMapper;
@@ -33,6 +33,7 @@ public class VipUserController {
         VipUserExample v = new VipUserExample();
         v.createCriteria().andAccountEqualTo(vipUser.getAccount())
                 .andPwEqualTo(vipUser.getPw());
+
         List<VipUser> vipUsers = vipUserMapper.selectByExample(v);
         if (vipUsers.size() == 0) {
             throw new HaltException("账号或密码不正确");

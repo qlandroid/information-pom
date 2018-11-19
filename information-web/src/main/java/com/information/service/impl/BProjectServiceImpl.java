@@ -5,15 +5,19 @@ import com.github.pagehelper.PageHelper;
 import com.information.HaltException;
 import com.information.ReloginException;
 import com.information.dao.BProjectMapper;
+import com.information.dao.BProjectTypeMapper;
 import com.information.dao.VipUserMapper;
 import com.information.pojo.BProject;
+import com.information.pojo.BProjectType;
+import com.information.pojo.BProjectTypeExample;
 import com.information.pojo.VipUser;
 import com.information.service.IBProjectService;
-import com.mysql.jdbc.StringUtils;
+import com.mysql.cj.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("bProjectService")
 public class BProjectServiceImpl implements IBProjectService {
@@ -22,6 +26,8 @@ public class BProjectServiceImpl implements IBProjectService {
     BProjectMapper bProjectMapper;
     @Autowired
     VipUserMapper userMapper;
+    @Autowired
+    BProjectTypeMapper bProjectTypeMapper;
 
     @Override
     public void insertBproject(BProject insertData) {
@@ -113,5 +119,19 @@ public class BProjectServiceImpl implements IBProjectService {
         }
 
         return bProject;
+    }
+
+    @Override
+    public List<BProjectType> selectTypes() {
+        BProjectTypeExample b = new BProjectTypeExample();
+        b.createCriteria().andParentIdEqualTo(-1);
+        List<BProjectType> bProjectTypes = bProjectTypeMapper.selectByExample(b);
+        for (BProjectType bProjectType : bProjectTypes) {
+            b.clear();
+            b.createCriteria().andParentIdEqualTo(bProjectType.getId());
+            List<BProjectType> bProjectTypes1 = bProjectTypeMapper.selectByExample(b);
+            bProjectType.setChildList(bProjectTypes1);
+        }
+        return bProjectTypes;
     }
 }

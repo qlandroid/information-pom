@@ -1,5 +1,7 @@
 package com.information.pojo;
 
+import java.util.List;
+
 public class BProjectType {
     private Integer id;
 
@@ -8,6 +10,16 @@ public class BProjectType {
     private Integer parentId;
 
     private String img;
+
+    private List<BProjectType> childList;
+
+    public List<BProjectType> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(List<BProjectType> childList) {
+        this.childList = childList;
+    }
 
     public Integer getId() {
         return id;

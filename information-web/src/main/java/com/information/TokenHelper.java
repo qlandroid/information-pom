@@ -2,7 +2,7 @@ package com.information;
 
 import com.information.base.ErrorCode;
 import com.information.pojo.VipUser;
-import com.mysql.jdbc.StringUtils;
+import com.mysql.cj.util.StringUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;

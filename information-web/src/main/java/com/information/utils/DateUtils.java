@@ -1,6 +1,7 @@
 package com.information.utils;
 
-import com.mysql.jdbc.StringUtils;
+
+import com.mysql.cj.util.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
